@@ -1,22 +1,20 @@
 import './cards.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
+import axios from '../../Axios';
 
 export default function Cards() {
-  const [people, setPeople] = useState([
-    {
-      name: 'elo musk',
-      url: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg',
-    },
-    {
-      name: 'elo musk',
-      url: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg',
-    },
-    {
-      name: 'elo musk',
-      url: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg',
-    },
-  ]);
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get('./users');
+      setPeople(request.data);
+    }
+
+    fetchData()
+  }, []);
+
 
   function swiped(direction, nameToDelete) {
     console.log(`removing ${nameToDelete}`);
@@ -38,7 +36,7 @@ export default function Cards() {
         >
           <div
             className="card"
-            style={{ backgroundImage: `url(${person.url})` }}
+            style={{ backgroundImage: `url(${person.img})` }}
           >
             <h3>{person.name}</h3>
           </div>
