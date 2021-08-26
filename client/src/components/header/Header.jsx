@@ -10,7 +10,9 @@ export default function Header() {
         <PersonIcon fontSize="large" className="header-icon" />
       </IconButton>
       <img className="header-logo" src="./assets/tinder-logo.png" alt="" />
-
+      <IconButton>
+        <ForumIcon />
+      </IconButton>
     </div>
   );
 }
